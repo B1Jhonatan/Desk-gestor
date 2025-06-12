@@ -4,6 +4,8 @@ import com.jaimes.gestorclaves.models.EncodeModel;
 import com.jaimes.gestorclaves.models.UsuarioModel;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Conexion {
     private static final String urlUsers = "jdbc:sqlite:data_base/users.db";
@@ -58,6 +60,26 @@ public class Conexion {
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
+    }
+
+    public static List<EncodeModel> getEncodeModel(){
+        List<EncodeModel> encodeModels = new ArrayList<>();
+        String sql = "SELECT * FROM usuarios";
+        try(Connection conn = DriverManager.getConnection(urlClaves)){
+            if (conn != null){
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
+                while (rs.next()){
+                    String nombre = rs.getString("nombre");
+                    String clave = rs.getString("clave");
+                    EncodeModel encodeModel = new EncodeModel(nombre, clave);
+                    encodeModels.add(encodeModel);
+                }
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return encodeModels;
     }
 
 }

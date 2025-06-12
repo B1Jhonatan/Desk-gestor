@@ -1,5 +1,7 @@
 package com.jaimes.gestorclaves.models;
 
+import javafx.collections.ObservableArray;
+
 public class EncodeModel {
 
     private String name;

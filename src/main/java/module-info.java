@@ -11,4 +11,5 @@ module com.jaimes.gestorclaves {
     opens com.jaimes.gestorclaves to javafx.fxml;
     exports com.jaimes.gestorclaves;
     exports com.jaimes.gestorclaves.controller;
+    exports com.jaimes.gestorclaves.models;
 }

@@ -12,11 +12,11 @@
         <TextField fx:id="txtClave" layoutX="270.0" layoutY="30.0" prefHeight="30.0" prefWidth="520.0" />
         <Button fx:id="btnModificar" layoutX="10.0" layoutY="70.0" prefHeight="30.0" prefWidth="120.0" text="Modificar" />
         <Button fx:id="btnEliminar" layoutX="140.0" layoutY="70.0" prefHeight="30.0" prefWidth="120.0" text="Eliminar" />
-      <TableView layoutX="10.0" layoutY="110.0" prefHeight="380.0" prefWidth="780.0">
+      <TableView fx:id="tblClaves" layoutX="10.0" layoutY="110.0" prefHeight="380.0" prefWidth="780.0">
         <columns>
-          <TableColumn prefWidth="40.0" text="ID" />
-          <TableColumn prefWidth="120.0" text="Nombre" />
-            <TableColumn prefWidth="620.0" text="Contraseña" />
+          <TableColumn fx:id="tblId" prefWidth="40.0" text="ID" />
+          <TableColumn fx:id="tblNombre" prefWidth="120.0" text="Nombre" />
+            <TableColumn fx:id="tblClave" prefWidth="620.0" text="Contraseña" />
         </columns>
       </TableView>
     </Pane>
