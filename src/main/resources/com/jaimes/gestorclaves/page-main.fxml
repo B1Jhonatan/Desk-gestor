@@ -5,11 +5,13 @@
 
 <VBox prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jaimes.gestorclaves.controller.PageMainController">
     <Pane prefHeight="500.0" prefWidth="800.0">
-        <Button layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="120.0" text="Agregar" />
-        <TextField layoutX="140.0" layoutY="30.0" prefHeight="30.0" prefWidth="120.0" />
-        <TextField layoutX="270.0" layoutY="30.0" prefHeight="30.0" prefWidth="520.0" />
-        <Button layoutX="10.0" layoutY="70.0" prefHeight="30.0" prefWidth="120.0" text="Modificar" />
-        <Button layoutX="140.0" layoutY="70.0" prefHeight="30.0" prefWidth="120.0" text="Eliminar" />
+        <Button fx:id="btnAgregar" layoutX="10.0" layoutY="10.0" onAction="#onClickAgregar" prefHeight="50.0" prefWidth="120.0" text="Agregar" />
+        <Label layoutX="150.0" layoutY="10.0" text="Nombre" />
+        <TextField fx:id="txtNombre" layoutX="140.0" layoutY="30.0" prefHeight="30.0" prefWidth="120.0" />
+        <Label layoutX="280.0" layoutY="10.0" text="Contraseña" />
+        <TextField fx:id="txtClave" layoutX="270.0" layoutY="30.0" prefHeight="30.0" prefWidth="520.0" />
+        <Button fx:id="btnModificar" layoutX="10.0" layoutY="70.0" prefHeight="30.0" prefWidth="120.0" text="Modificar" />
+        <Button fx:id="btnEliminar" layoutX="140.0" layoutY="70.0" prefHeight="30.0" prefWidth="120.0" text="Eliminar" />
       <TableView layoutX="10.0" layoutY="110.0" prefHeight="380.0" prefWidth="780.0">
         <columns>
           <TableColumn prefWidth="40.0" text="ID" />

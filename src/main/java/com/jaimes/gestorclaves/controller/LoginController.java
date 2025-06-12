@@ -23,7 +23,7 @@ public class LoginController {
     public void onClickLoginAutenticacion() throws IOException {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
-        UsuarioModel usuarioModel = new UsuarioModel(1,"Jhonatan", "1234");
+        UsuarioModel usuarioModel = new UsuarioModel("Jhonatan", "1234");
         if (loginService.autenticacion(username, password)){
             Main.changeScene("page-main.fxml", "Gestor", 800, 500);
         } else {
