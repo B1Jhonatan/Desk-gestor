@@ -5,6 +5,7 @@ import com.jaimes.gestorclaves.models.EncodeModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -21,18 +22,12 @@ public class PageMainController {
     public TableView<EncodeModel> tblClaves;
 
     @FXML
-    public TableColumn<EncodeModel, String> tblNombre, tblClave;
+    public TableColumn<EncodeModel, String> tblNombre, tblClave, tblId;
+
+    @FXML
+    public Label lblId;
 
     ObservableList<EncodeModel> observableList = FXCollections.observableArrayList();
-
-    public void onClickAgregar(){
-        String nombre = txtNombre.getText();
-        String clave = txtClave.getText();
-        EncodeModel encodeModel = new EncodeModel(nombre, clave);
-        Conexion.savePassword(encodeModel);
-        observableList.clear();
-        observableList.addAll(Conexion.getEncodeModel());
-    }
 
     @FXML
     public void initialize(){
@@ -41,7 +36,49 @@ public class PageMainController {
         // Agregamos la parte del "EncodeModel" que le corresponde a cada columna
         tblNombre.setCellValueFactory(new PropertyValueFactory<>("name"));
         tblClave.setCellValueFactory(new PropertyValueFactory<>("encode"));
+        tblId.setCellValueFactory(new PropertyValueFactory<>("id"));
         // Agregamos la lista a los items
         tblClaves.setItems(observableList);
+    }
+
+    @FXML
+    public void onClickAgregar(){
+        String nombre = txtNombre.getText();
+        String clave = txtClave.getText();
+        EncodeModel encodeModel = new EncodeModel(null, nombre, clave);
+        Conexion.savePassword(encodeModel);
+        txtNombre.clear();
+        txtClave.clear();
+        observableList.clear();
+        observableList.addAll(Conexion.getEncodeModel());
+    }
+
+    @FXML
+    public void onClickActualizar(){
+        String nombre = txtNombre.getText();
+        String clave = txtClave.getText();
+        Integer id = Integer.parseInt(lblId.getText());
+        EncodeModel encodeModel = new EncodeModel(id, nombre, clave);
+        Conexion.updatePassword(encodeModel);
+        txtNombre.clear();
+        txtClave.clear();
+        observableList.clear();
+        observableList.addAll(Conexion.getEncodeModel());
+    }
+
+    @FXML
+    public void onClickEliminar(){
+        EncodeModel encodeModel = tblClaves.getSelectionModel().getSelectedItem();
+        Conexion.deletePassword(encodeModel.getId());
+        observableList.clear();
+        observableList.addAll(Conexion.getEncodeModel());
+    }
+
+    @FXML
+    public void onClickModificar(){
+        EncodeModel encodeModel = tblClaves.getSelectionModel().getSelectedItem();
+        txtClave.setText(encodeModel.getEncode());
+        txtNombre.setText(encodeModel.getName());
+        lblId.setText(encodeModel.getId().toString());
     }
 }

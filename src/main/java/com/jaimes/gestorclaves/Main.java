@@ -1,5 +1,6 @@
 package com.jaimes.gestorclaves;
 
+import com.jaimes.gestorclaves.repository.Conexion;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
