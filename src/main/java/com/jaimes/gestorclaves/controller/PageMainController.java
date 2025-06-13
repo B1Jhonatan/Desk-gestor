@@ -1,6 +1,6 @@
 package com.jaimes.gestorclaves.controller;
 
-import com.jaimes.gestorclaves.data_base.Conexion;
+import com.jaimes.gestorclaves.repository.Conexion;
 import com.jaimes.gestorclaves.models.EncodeModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
