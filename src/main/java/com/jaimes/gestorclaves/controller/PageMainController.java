@@ -1,6 +1,6 @@
 package com.jaimes.gestorclaves.controller;
 
-import com.jaimes.gestorclaves.data_base.Conexion;
+import com.jaimes.gestorclaves.repository.Conexion;
 import com.jaimes.gestorclaves.models.EncodeModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,8 +10,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-
-import java.util.List;
 
 public class PageMainController {
 

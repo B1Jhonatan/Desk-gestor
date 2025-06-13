@@ -1,4 +1,4 @@
-package com.jaimes.gestorclaves.data_base;
+package com.jaimes.gestorclaves.repository;
 
 import com.jaimes.gestorclaves.models.EncodeModel;
 import com.jaimes.gestorclaves.models.UsuarioModel;
