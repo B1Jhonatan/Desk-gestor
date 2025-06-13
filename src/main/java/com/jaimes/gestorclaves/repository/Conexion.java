@@ -42,6 +42,7 @@ public class Conexion {
                 pstmt.setString(1, encodeModel.getName());
                 pstmt.setString(2, encodeModel.getEncode());
                 pstmt.executeUpdate();
+                pstmt.close();
             }
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -56,10 +57,32 @@ public class Conexion {
                 pstmt.setString(1, usuarioModel.getUsername());
                 pstmt.setString(2, usuarioModel.getPassword());
                 pstmt.executeUpdate();
+                pstmt.close();
             }
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
+    }
+
+    public static List<UsuarioModel> getUsuariosModel(){
+        List<UsuarioModel> usuarioModels = new ArrayList<>();
+        String sql = "SELECT * FROM usuarios";
+        try(Connection conn = DriverManager.getConnection(urlUsers)){
+            if(conn != null){
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
+                while (rs.next()){
+                    String username = rs.getString("username");
+                    String password = rs.getString("password");
+                    UsuarioModel usuarioModel = new UsuarioModel(username, password);
+                    usuarioModels.add(usuarioModel);
+                }
+
+            }
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return usuarioModels;
     }
 
     public static List<EncodeModel> getEncodeModel(){
@@ -69,17 +92,19 @@ public class Conexion {
             if (conn != null){
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
-                while (rs.next()){
+                while (rs.next()) {
                     String nombre = rs.getString("nombre");
                     String clave = rs.getString("clave");
                     EncodeModel encodeModel = new EncodeModel(nombre, clave);
                     encodeModels.add(encodeModel);
                 }
+                stmt.close();
             }
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
         return encodeModels;
     }
+
 
 }
