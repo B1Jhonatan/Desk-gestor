@@ -72,7 +72,8 @@ public class Conexion {
                 while (rs.next()){
                     String nombre = rs.getString("nombre");
                     String clave = rs.getString("clave");
-                    EncodeModel encodeModel = new EncodeModel(nombre, clave);
+                    Integer id = rs.getInt("id");
+                    EncodeModel encodeModel = new EncodeModel(clave, nombre, id);
                     encodeModels.add(encodeModel);
                 }
             }
@@ -80,6 +81,30 @@ public class Conexion {
             System.out.println(e.getMessage());
         }
         return encodeModels;
+    }
+
+    public static void deletePassword(int id){
+        String sql= "DELETE FROM usuarios WHERE id = ?";
+        try (Connection conn = DriverManager.getConnection(urlClaves)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void updatePassword(EncodeModel encodeModel){
+        String sql = "UPDATE usuarios SET nombre = ?, clave = ? WHERE id = ?";
+        try (Connection conn = DriverManager.getConnection(urlClaves)){
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(3, encodeModel.getId());
+            pstmt.setString(1, encodeModel.getName());
+            pstmt.setString(2, encodeModel.getEncode());
+            pstmt.executeUpdate();
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 
 }

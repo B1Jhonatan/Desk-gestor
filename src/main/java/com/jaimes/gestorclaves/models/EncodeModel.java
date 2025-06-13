@@ -4,15 +4,25 @@ import javafx.collections.ObservableArray;
 
 public class EncodeModel {
 
+    private Integer id;
     private String name;
     private String encode;
 
     public EncodeModel() {
     }
 
-    public EncodeModel(String name, String encode) {
-        this.name = name;
+    public EncodeModel(String encode, String name, Integer id) {
         this.encode = encode;
+        this.name = name;
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
