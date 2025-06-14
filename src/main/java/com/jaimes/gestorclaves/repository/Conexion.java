@@ -8,24 +8,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Conexion {
-    private static final String urlUsers = "jdbc:sqlite:data_base/users.db";
-    private static final String urlClaves = "jdbc:sqlite:data_base/passwords.db";
-    private static final String url = "jdbc:sqlite:data_base/passwords.db";
 
+    private static final String url = "jdbc:sqlite:data_base/data-app.db";
 
     public static void conexion(){
         try (Connection conn = DriverManager.getConnection(url)) {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String sql = """
-                    CREATE TABLE IF NOT EXISTS claves (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        name TEXT NOT NULL,
-                        password TEXT NOT NULL
-                    );
-                    """;
-                stmt.execute(sql);
+                String sqlUsuarios = """
+                        CREATE TABLE IF NOT EXISTS usuarios (
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            username TEXT NOT NULL,
+                            password TEXT NOT NULL
+                        );
+                        """;
+                stmt.execute(sqlUsuarios);
+                String sqlClaves = """
+                        CREATE TABLE IF NOT EXISTS claves (
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            site_web TEXT NOT NULL,
+                            password TEXT NOT NULL,
+                            usuario_id INTEGER,
+                            FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+                        );
+                        """;
+                stmt.execute(sqlClaves);
                 System.out.println("Tabla creada correctamente.");
                 stmt.close();
             }
@@ -35,8 +43,8 @@ public class Conexion {
     }
 
     public static void savePassword(EncodeModel encodeModel){
-        String sql = "INSERT INTO claves (name, password) VALUES (?,?)";
-        try(Connection conn = DriverManager.getConnection(urlClaves)){
+        String sql = "INSERT INTO claves (site_web, password) VALUES (?,?)";
+        try(Connection conn = DriverManager.getConnection(url)){
             if (conn != null){
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 pstmt.setString(1, encodeModel.getName());
@@ -51,7 +59,7 @@ public class Conexion {
 
     public static void saveUsers(UsuarioModel usuarioModel){
         String sql = "INSERT INTO usuarios (username, password) VALUES (?,?)";
-        try(Connection conn = DriverManager.getConnection(urlUsers)){
+        try(Connection conn = DriverManager.getConnection(url)){
             if (conn != null){
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 pstmt.setString(1, usuarioModel.getUsername());
@@ -67,7 +75,7 @@ public class Conexion {
     public static List<UsuarioModel> getUsuariosModel(){
         List<UsuarioModel> usuarioModels = new ArrayList<>();
         String sql = "SELECT * FROM usuarios";
-        try(Connection conn = DriverManager.getConnection(urlUsers)){
+        try(Connection conn = DriverManager.getConnection(url)){
             if(conn != null){
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
@@ -88,12 +96,12 @@ public class Conexion {
     public static List<EncodeModel> getEncodeModel(){
         List<EncodeModel> encodeModels = new ArrayList<>();
         String sql = "SELECT * FROM claves";
-        try(Connection conn = DriverManager.getConnection(urlClaves)){
+        try(Connection conn = DriverManager.getConnection(url)){
             if (conn != null){
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
                 while (rs.next()) {
-                    String nombre = rs.getString("name");
+                    String nombre = rs.getString("site_web");
                     String clave = rs.getString("password");
                     Integer id = rs.getInt("id");
                     EncodeModel encodeModel = new EncodeModel(id, nombre, clave);
@@ -108,8 +116,8 @@ public class Conexion {
     }
 
     public static void updatePassword(EncodeModel encodeModel){
-        String sql = "UPDATE claves SET name = ?, password = ? WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(urlClaves)){
+        String sql = "UPDATE claves SET site_web = ?, password = ? WHERE id = ?";
+        try (Connection conn = DriverManager.getConnection(url)){
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(3, encodeModel.getId());
             pstmt.setString(1, encodeModel.getName());
@@ -122,7 +130,7 @@ public class Conexion {
 
     public static void deletePassword(int id){
         String sql= "DELETE FROM claves WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(urlClaves)) {
+        try (Connection conn = DriverManager.getConnection(url)) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             pstmt.executeUpdate();

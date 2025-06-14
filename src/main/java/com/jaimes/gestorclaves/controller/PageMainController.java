@@ -1,5 +1,6 @@
 package com.jaimes.gestorclaves.controller;
 
+import com.jaimes.gestorclaves.Main;
 import com.jaimes.gestorclaves.repository.Conexion;
 import com.jaimes.gestorclaves.models.EncodeModel;
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.IOException;
 import java.util.List;
 
 public class PageMainController {
@@ -80,5 +82,10 @@ public class PageMainController {
         txtClave.setText(encodeModel.getEncode());
         txtNombre.setText(encodeModel.getName());
         lblId.setText(encodeModel.getId().toString());
+    }
+
+    @FXML
+    public void onClickCerrarSecion() throws IOException {
+        Main.changeScene("login-view.fxml", "Iniciar sesion", 450, 500);
     }
 }
