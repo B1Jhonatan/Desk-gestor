@@ -27,7 +27,7 @@ public class PageMainController {
     public TableColumn<EncodeModel, String> tblNombre, tblClave, tblId;
 
     @FXML
-    public Label lblId;
+    public Label lblIdClave, lblIdUsuario;
 
     ObservableList<EncodeModel> observableList = FXCollections.observableArrayList();
 
@@ -59,7 +59,7 @@ public class PageMainController {
     public void onClickActualizar(){
         String nombre = txtNombre.getText();
         String clave = txtClave.getText();
-        Integer id = Integer.parseInt(lblId.getText());
+        Integer id = Integer.parseInt(lblIdClave.getText());
         EncodeModel encodeModel = new EncodeModel(id, nombre, clave);
         Conexion.updatePassword(encodeModel);
         txtNombre.clear();
@@ -81,7 +81,7 @@ public class PageMainController {
         EncodeModel encodeModel = tblClaves.getSelectionModel().getSelectedItem();
         txtClave.setText(encodeModel.getEncode());
         txtNombre.setText(encodeModel.getName());
-        lblId.setText(encodeModel.getId().toString());
+        lblIdClave.setText(encodeModel.getId().toString());
     }
 
     @FXML

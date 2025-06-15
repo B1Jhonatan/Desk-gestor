@@ -24,7 +24,7 @@ public class LoginController {
     public void onClickLoginAutenticacion() throws IOException {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
-        UsuarioModel usuarioModel = new UsuarioModel(username, password);
+        UsuarioModel usuarioModel = new UsuarioModel(null, username, password);
         if (loginService.autenticacion(usuarioModel)){
             Main.changeScene("page-main.fxml", "Gestor", 800, 500);
         } else {
@@ -35,7 +35,7 @@ public class LoginController {
     public void onClickSaveUser(){
         String username = txtUsername.getText();
         String password = txtPassword.getText();
-        UsuarioModel usuarioModel = new UsuarioModel(username, password);
+        UsuarioModel usuarioModel = new UsuarioModel(null, username, password);
         Conexion.saveUsers(usuarioModel);
     }
 
