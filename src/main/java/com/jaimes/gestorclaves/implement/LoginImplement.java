@@ -1,5 +1,7 @@
 package com.jaimes.gestorclaves.implement;
 
+import com.jaimes.gestorclaves.Main;
+import com.jaimes.gestorclaves.controller.PageMainController;
 import com.jaimes.gestorclaves.models.UsuarioModel;
 import com.jaimes.gestorclaves.repository.Conexion;
 import com.jaimes.gestorclaves.services.LoginService;
@@ -8,14 +10,15 @@ import java.util.List;
 
 public class LoginImplement implements LoginService {
     @Override
-    public boolean autenticacion(UsuarioModel usuarioModel) {
+    public UsuarioModel autenticacion(UsuarioModel usuarioModel) {
         List<UsuarioModel> usuarioModels = Conexion.getUsuariosModel();
         for(UsuarioModel um : usuarioModels) {
             if (um.getUsername().equals(usuarioModel.getUsername()) &&
                     um.getPassword().equals(usuarioModel.getPassword())) {
-                return true;
+                return um;
             }
         }
-        return false;
+
+        return null;
     }
 }

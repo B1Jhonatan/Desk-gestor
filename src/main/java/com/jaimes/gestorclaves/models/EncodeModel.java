@@ -7,14 +7,16 @@ public class EncodeModel {
     private Integer id;
     private String name;
     private String encode;
+    private Integer userId;
 
     public EncodeModel() {
     }
 
-    public EncodeModel(Integer id, String name, String encode) {
+    public EncodeModel(Integer id, String name, String encode, Integer userId) {
         this.id = id;
         this.name = name;
         this.encode = encode;
+        this.userId = userId;
     }
 
     public Integer getId() {
@@ -39,5 +41,13 @@ public class EncodeModel {
 
     public void setEncode(String encode) {
         this.encode = encode;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

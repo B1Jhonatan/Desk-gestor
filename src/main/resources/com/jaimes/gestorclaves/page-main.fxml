@@ -22,7 +22,7 @@
         <Label fx:id="lblIdClave" layoutX="480.0" layoutY="75.0" text="Label" visible="false" />
         <Button layoutX="270.0" layoutY="69.0" mnemonicParsing="false" onAction="#onClickActualizar" prefHeight="30.0" prefWidth="120.0" text="Actualizar" />
       <Button layoutX="666.0" layoutY="72.0" mnemonicParsing="false" onAction="#onClickCerrarSecion" prefHeight="30.0" prefWidth="120.0" text="Cerrar sesion" />
-      <Label fx:id="lblIdUsuario" layoutX="557.0" layoutY="78.0" text="Label" visible="false" />
+      <Label fx:id="lblIdUsuario" layoutX="557.0" layoutY="78.0" text="Label" />
     </Pane>
 
 </VBox>

@@ -1,5 +1,6 @@
 package com.jaimes.gestorclaves;
 
+import com.jaimes.gestorclaves.controller.PageMainController;
 import com.jaimes.gestorclaves.repository.Conexion;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +10,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
+
     public static Stage mainStage;
+
     @Override
     public void start(Stage stage) throws IOException {
         mainStage = stage;

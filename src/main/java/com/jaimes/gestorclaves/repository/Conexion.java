@@ -104,7 +104,8 @@ public class Conexion {
                     String nombre = rs.getString("site_web");
                     String clave = rs.getString("password");
                     Integer id = rs.getInt("id");
-                    EncodeModel encodeModel = new EncodeModel(id, nombre, clave);
+                    Integer idUser = rs.getInt("usuario_id");
+                    EncodeModel encodeModel = new EncodeModel(id, nombre, clave, idUser);
                     encodeModels.add(encodeModel);
                 }
                 stmt.close();

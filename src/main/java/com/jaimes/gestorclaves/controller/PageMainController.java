@@ -17,6 +17,8 @@ import java.util.List;
 
 public class PageMainController {
 
+    public static Integer idUser;
+
     @FXML
     public TextField txtNombre, txtClave;
 
@@ -31,6 +33,7 @@ public class PageMainController {
 
     ObservableList<EncodeModel> observableList = FXCollections.observableArrayList();
 
+
     @FXML
     public void initialize(){
         // Consultamos la base de datos y esta nos devuelve una "List<EncodeModel>"
@@ -43,11 +46,16 @@ public class PageMainController {
         tblClaves.setItems(observableList);
     }
 
+    /*public void idUser(Integer idUser){
+        this.lblIdUsuario.setText(idUser.toString());
+    }*/
+
     @FXML
     public void onClickAgregar(){
         String nombre = txtNombre.getText();
         String clave = txtClave.getText();
-        EncodeModel encodeModel = new EncodeModel(null, nombre, clave);
+        Integer idUser = Integer.parseInt(lblIdUsuario.getText());
+        EncodeModel encodeModel = new EncodeModel(null, nombre, clave, idUser);
         Conexion.savePassword(encodeModel);
         txtNombre.clear();
         txtClave.clear();
@@ -59,8 +67,9 @@ public class PageMainController {
     public void onClickActualizar(){
         String nombre = txtNombre.getText();
         String clave = txtClave.getText();
+        Integer idUser = Integer.parseInt(lblIdUsuario.getText());
         Integer id = Integer.parseInt(lblIdClave.getText());
-        EncodeModel encodeModel = new EncodeModel(id, nombre, clave);
+        EncodeModel encodeModel = new EncodeModel(id, nombre, clave, idUser);
         Conexion.updatePassword(encodeModel);
         txtNombre.clear();
         txtClave.clear();

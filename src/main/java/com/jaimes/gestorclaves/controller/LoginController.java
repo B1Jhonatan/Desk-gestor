@@ -25,7 +25,8 @@ public class LoginController {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         UsuarioModel usuarioModel = new UsuarioModel(null, username, password);
-        if (loginService.autenticacion(usuarioModel)){
+        UsuarioModel usuarioAuten = loginService.autenticacion(usuarioModel);
+        if (usuarioAuten != null){
             Main.changeScene("page-main.fxml", "Gestor", 800, 500);
         } else {
             System.out.println("Usuario y contrasenha incorrectos");
@@ -40,11 +41,11 @@ public class LoginController {
     }
 
     public void onClickLogin() throws IOException {
-        Main.changeScene("login-view.fxml", "Iniciar sesion", 450, 500);;
+        Main.changeScene("login-view.fxml", "Iniciar sesion", 450, 500);
     }
 
     public void onClickCrear() throws IOException {
-        Main.changeScene("crear-view.fxml", "Crear usuario", 450, 500);;
+        Main.changeScene("crear-view.fxml", "Crear usuario", 450, 500);
     }
 
 }
