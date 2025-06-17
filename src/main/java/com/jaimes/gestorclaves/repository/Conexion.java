@@ -43,12 +43,13 @@ public class Conexion {
     }
 
     public static void savePassword(EncodeModel encodeModel){
-        String sql = "INSERT INTO claves (site_web, password) VALUES (?,?)";
+        String sql = "INSERT INTO claves (site_web, password, usuario_id) VALUES (?,?,?)";
         try(Connection conn = DriverManager.getConnection(url)){
             if (conn != null){
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 pstmt.setString(1, encodeModel.getName());
                 pstmt.setString(2, encodeModel.getEncode());
+                pstmt.setInt(3, encodeModel.getUserId());
                 pstmt.executeUpdate();
                 pstmt.close();
             }
@@ -82,7 +83,8 @@ public class Conexion {
                 while (rs.next()){
                     String username = rs.getString("username");
                     String password = rs.getString("password");
-                    UsuarioModel usuarioModel = new UsuarioModel(null, username, password);
+                    Integer id = rs.getInt("id");
+                    UsuarioModel usuarioModel = new UsuarioModel(id, username, password);
                     usuarioModels.add(usuarioModel);
                 }
 
@@ -93,13 +95,14 @@ public class Conexion {
         return usuarioModels;
     }
 
-    public static List<EncodeModel> getEncodeModel(){
+    public static List<EncodeModel> getEncodeModel(Integer idUsuario){
         List<EncodeModel> encodeModels = new ArrayList<>();
-        String sql = "SELECT * FROM claves";
+        String sql = "SELECT * FROM claves WHERE usuario_id = ?";
         try(Connection conn = DriverManager.getConnection(url)){
             if (conn != null){
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(sql);
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, idUsuario);
+                ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
                     String nombre = rs.getString("site_web");
                     String clave = rs.getString("password");

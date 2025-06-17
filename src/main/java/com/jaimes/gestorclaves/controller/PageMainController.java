@@ -1,8 +1,10 @@
 package com.jaimes.gestorclaves.controller;
 
 import com.jaimes.gestorclaves.Main;
+import com.jaimes.gestorclaves.implement.SceneImplement;
 import com.jaimes.gestorclaves.repository.Conexion;
 import com.jaimes.gestorclaves.models.EncodeModel;
+import com.jaimes.gestorclaves.services.SceneService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,11 +15,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
-import java.util.List;
 
 public class PageMainController {
 
-    public static Integer idUser;
+    private final SceneService sceneService = new SceneImplement();
+
+    private Integer idUser;
 
     @FXML
     public TextField txtNombre, txtClave;
@@ -33,22 +36,30 @@ public class PageMainController {
 
     ObservableList<EncodeModel> observableList = FXCollections.observableArrayList();
 
-
     @FXML
     public void initialize(){
         // Consultamos la base de datos y esta nos devuelve una "List<EncodeModel>"
-        observableList.addAll(Conexion.getEncodeModel());
+
         // Agregamos la parte del "EncodeModel" que le corresponde a cada columna
         tblNombre.setCellValueFactory(new PropertyValueFactory<>("name"));
         tblClave.setCellValueFactory(new PropertyValueFactory<>("encode"));
         tblId.setCellValueFactory(new PropertyValueFactory<>("id"));
         // Agregamos la lista a los items
         tblClaves.setItems(observableList);
+        updateUserLabel();
     }
 
-    /*public void idUser(Integer idUser){
-        this.lblIdUsuario.setText(idUser.toString());
-    }*/
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
+        updateUserLabel(); // Actualizar cuando se establece el ID
+    }
+
+    private void updateUserLabel() {
+        if(lblIdUsuario != null && idUser != null) {
+            lblIdUsuario.setText(idUser.toString());
+            observableList.addAll(Conexion.getEncodeModel(idUser));
+        }
+    }
 
     @FXML
     public void onClickAgregar(){
@@ -60,7 +71,7 @@ public class PageMainController {
         txtNombre.clear();
         txtClave.clear();
         observableList.clear();
-        observableList.addAll(Conexion.getEncodeModel());
+        observableList.addAll(Conexion.getEncodeModel(idUser));
     }
 
     @FXML
@@ -74,7 +85,7 @@ public class PageMainController {
         txtNombre.clear();
         txtClave.clear();
         observableList.clear();
-        observableList.addAll(Conexion.getEncodeModel());
+        observableList.addAll(Conexion.getEncodeModel(idUser));
     }
 
     @FXML
@@ -82,7 +93,7 @@ public class PageMainController {
         EncodeModel encodeModel = tblClaves.getSelectionModel().getSelectedItem();
         Conexion.deletePassword(encodeModel.getId());
         observableList.clear();
-        observableList.addAll(Conexion.getEncodeModel());
+        observableList.addAll(Conexion.getEncodeModel(idUser));
     }
 
     @FXML
@@ -95,6 +106,6 @@ public class PageMainController {
 
     @FXML
     public void onClickCerrarSecion() throws IOException {
-        Main.changeScene("login-view.fxml", "Iniciar sesion", 450, 500);
+        sceneService.changePage("login-view.fxml", "Iniciar sesion", 450, 500);
     }
 }

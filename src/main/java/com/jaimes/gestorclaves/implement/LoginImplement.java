@@ -1,12 +1,11 @@
 package com.jaimes.gestorclaves.implement;
 
-import com.jaimes.gestorclaves.Main;
-import com.jaimes.gestorclaves.controller.PageMainController;
 import com.jaimes.gestorclaves.models.UsuarioModel;
 import com.jaimes.gestorclaves.repository.Conexion;
 import com.jaimes.gestorclaves.services.LoginService;
 
 import java.util.List;
+
 
 public class LoginImplement implements LoginService {
     @Override
@@ -18,7 +17,7 @@ public class LoginImplement implements LoginService {
                 return um;
             }
         }
-
         return null;
     }
+
 }
