@@ -2,16 +2,38 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jaimes.gestorclaves.controller.PageMainController">
+<VBox prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jaimes.gestorclaves.controller.PageMainController">
     <Pane prefHeight="500.0" prefWidth="800.0">
-        <Button fx:id="btnAgregar" layoutX="10.0" layoutY="10.0" onAction="#onClickAgregar" prefHeight="50.0" prefWidth="120.0" text="Agregar" />
-        <Label layoutX="150.0" layoutY="10.0" text="Nombre" />
-        <TextField fx:id="txtNombre" layoutX="140.0" layoutY="30.0" prefHeight="30.0" prefWidth="120.0" />
-        <Label layoutX="280.0" layoutY="10.0" text="Contraseña" />
-        <TextField fx:id="txtClave" layoutX="270.0" layoutY="30.0" prefHeight="30.0" prefWidth="520.0" />
-        <Button fx:id="btnModificar" layoutX="10.0" layoutY="70.0" onAction="#onClickModificar" prefHeight="30.0" prefWidth="120.0" text="Modificar" />
-        <Button fx:id="btnEliminar" layoutX="140.0" layoutY="70.0" onAction="#onClickEliminar" prefHeight="30.0" prefWidth="120.0" text="Eliminar" />
+        <Button fx:id="btnAgregar" layoutX="10.0" layoutY="10.0" onAction="#onClickAgregar" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #0d00ff; -fx-background-radius: 10;" text="Agregar" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+        <Label layoutX="150.0" layoutY="10.0" text="Nombre">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+        <TextField fx:id="txtNombre" layoutX="140.0" layoutY="30.0" prefHeight="30.0" prefWidth="120.0" promptText="Pagina web" style="-fx-background-color: white; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 1.5;">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+        <Label layoutX="280.0" layoutY="10.0" text="Contraseña">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+        <TextField fx:id="txtClave" layoutX="270.0" layoutY="30.0" prefHeight="30.0" prefWidth="520.0" promptText="Contraseña de la pagina web" style="-fx-background-color: white; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 1.5;">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+        <Button fx:id="btnModificar" layoutX="10.0" layoutY="70.0" onAction="#onClickModificar" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: white; -fx-border-color: #ffa600; -fx-border-radius: 10; -fx-border-width: 1.5;" text="Modificar" textFill="#ffa600">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+        <Button fx:id="btnEliminar" layoutX="140.0" layoutY="70.0" onAction="#onClickEliminar" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: white; -fx-border-color: #ff1313; -fx-border-radius: 10; -fx-border-width: 1.5;" text="Eliminar" textFill="#ff1313">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
         <TableView fx:id="tblClaves" layoutX="10.0" layoutY="110.0" prefHeight="380.0" prefWidth="780.0">
             <columns>
                 <TableColumn fx:id="tblId" prefWidth="40.0" text="ID" />
@@ -20,9 +42,15 @@
             </columns>
         </TableView>
         <Label fx:id="lblIdClave" layoutX="480.0" layoutY="75.0" text="Label" visible="false" />
-        <Button layoutX="270.0" layoutY="69.0" mnemonicParsing="false" onAction="#onClickActualizar" prefHeight="30.0" prefWidth="120.0" text="Actualizar" />
-      <Button layoutX="666.0" layoutY="72.0" mnemonicParsing="false" onAction="#onClickCerrarSecion" prefHeight="30.0" prefWidth="120.0" text="Cerrar sesion" />
-      <Label fx:id="lblIdUsuario" layoutX="557.0" layoutY="78.0" text="Label" />
+        <Button layoutX="270.0" layoutY="69.0" mnemonicParsing="false" onAction="#onClickActualizar" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: white; -fx-border-color: #4dad09; -fx-border-radius: 10; -fx-border-width: 1.5;" text="Actualizar" textFill="#4dad09">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button layoutX="666.0" layoutY="72.0" mnemonicParsing="false" onAction="#onClickCerrarSecion" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="Cerrar sesion" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Label fx:id="lblIdUsuario" layoutX="557.0" layoutY="78.0" text="Label" visible="false" />
     </Pane>
 
 </VBox>
